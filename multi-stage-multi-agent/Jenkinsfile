@@ -6,7 +6,10 @@ pipeline {
         docker { image 'maven:3.8.1-adoptopenjdk-11' }
       }
       steps {
-        sh 'mvn --version'
+        sh 'mvn archetype:generate -DgroupId=com.example -DartifactId=java-hello-world -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false'
+        dir('java-hello-world') {
+          sh 'mvn package'
+        }
       }
     }
     stage('Front-end') {
